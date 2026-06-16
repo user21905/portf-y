@@ -1,0 +1,30 @@
+.wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+}
+
+.circle,
+.circleSm {
+  border-radius: 50%;
+  border: 2px solid var(--color-border);
+  border-top-color: var(--color-accent);
+  animation: spin 0.7s linear infinite;
+}
+
+.circle {
+  width: 1.75rem;
+  height: 1.75rem;
+}
+
+.circleSm {
+  width: 1.1rem;
+  height: 1.1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

@@ -1,0 +1,554 @@
+.article {
+  padding-bottom: 4rem;
+}
+
+.breadcrumb {
+  font-size: 0.875rem;
+  color: var(--color-text-muted);
+  margin-bottom: 1.5rem;
+}
+
+.breadcrumb a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb a:hover {
+  color: var(--color-accent);
+}
+
+.header {
+  margin-bottom: 2rem;
+}
+
+.title {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  font-weight: 700;
+  margin: 0 0 1rem;
+  letter-spacing: -0.03em;
+  color: var(--color-text);
+}
+
+.badgeRow {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.badge {
+  padding: 0.25rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  color: var(--color-accent);
+  font-weight: 500;
+}
+
+/* Simulator Container */
+.simContainer {
+  margin: 2rem 0;
+  background: rgba(14, 17, 22, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-lg), var(--shadow-glow-aqua);
+}
+
+.simHeader {
+  display: flex;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background: rgba(10, 11, 16, 0.9);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.simDotGroup {
+  display: flex;
+  gap: 6px;
+}
+
+.simDotRed, .simDotYellow, .simDotGreen {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.simDotRed { background: #ef4444; }
+.simDotYellow { background: #f59e0b; }
+.simDotGreen { background: #10b981; }
+
+.simTitle {
+  flex-grow: 1;
+  text-align: center;
+  font-size: 0.85rem;
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  margin-right: 36px; /* Balance the dots spacing */
+}
+
+.simBody {
+  padding: 1.5rem;
+}
+
+/* Visualizer (Network Diagram) */
+.visualizer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(10, 15, 28, 0.5);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.03);
+  overflow: hidden;
+  position: relative;
+}
+
+.nodeCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 140px;
+  text-align: center;
+  z-index: 2;
+}
+
+.nodeIcon {
+  width: 60px;
+  height: 60px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--color-border);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.75rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.nodeActive {
+  background: rgba(45, 212, 191, 0.12);
+  border-color: var(--color-accent);
+  box-shadow: 0 0 20px rgba(45, 212, 191, 0.25);
+}
+
+.nodeConnected {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+  box-shadow: 0 0 15px rgba(16, 185, 129, 0.3);
+  animation: float 3s ease-in-out infinite;
+}
+
+.nodeOffline {
+  opacity: 0.5;
+}
+
+.nodeName {
+  font-size: 0.875rem;
+  font-weight: 550;
+  color: var(--color-text);
+  margin-bottom: 0.25rem;
+}
+
+.nodeIp {
+  font-size: 0.75rem;
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+}
+
+/* Network Line */
+.networkLine {
+  flex-grow: 1;
+  height: 2px;
+  background: rgba(255, 255, 255, 0.1);
+  margin: 0 1rem;
+  position: relative;
+}
+
+.scanRadar {
+  position: absolute;
+  top: -49px;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.15) 0%, transparent 70%);
+  animation: radarWave 2s infinite ease-in-out;
+}
+
+.connectionWire {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, var(--color-accent), #34d399);
+  position: relative;
+  box-shadow: 0 0 8px rgba(45, 212, 191, 0.4);
+}
+
+.pingPacket {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #f59e0b;
+  position: absolute;
+  top: -3px;
+  left: 0;
+  box-shadow: 0 0 8px #f59e0b;
+  animation: pingTravel 0.8s infinite linear;
+}
+
+.filePacket {
+  width: 12px;
+  height: 6px;
+  border-radius: 3px;
+  background: #10b981;
+  position: absolute;
+  top: -2px;
+  left: 0;
+  box-shadow: 0 0 8px #10b981;
+  animation: fileTravel 1.2s infinite linear;
+}
+
+/* Console & Control Panels */
+.consoleGrid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  .consoleGrid {
+    grid-template-columns: 1fr;
+  }
+  .visualizer {
+    padding: 1rem 0.5rem;
+  }
+  .nodeCard {
+    width: 100px;
+  }
+}
+
+.terminalPanel {
+  background: #0d111d;
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.panelTitle {
+  font-size: 0.8rem;
+  font-family: var(--font-mono);
+  color: var(--color-text-muted);
+  margin-bottom: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.terminalLogs {
+  height: 200px;
+  overflow-y: auto;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  line-height: 1.5;
+  padding-right: 0.5rem;
+}
+
+.terminalPlaceholder {
+  color: rgba(255, 255, 255, 0.3);
+  text-align: center;
+  padding-top: 3rem;
+  line-height: 1.6;
+}
+
+.logLine {
+  margin-bottom: 0.5rem;
+  display: flex;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+
+.logTime {
+  color: rgba(255, 255, 255, 0.35);
+  flex-shrink: 0;
+}
+
+.logText {
+  word-break: break-word;
+}
+
+.system { color: var(--color-accent); }
+.success { color: #34d399; }
+.info { color: var(--color-text-muted); }
+.message-sent { color: #f59e0b; }
+.message-received { color: var(--color-secondary-hover); }
+
+/* Control Panel */
+.controlPanel {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 8px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.btnPrimary {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border: none;
+  border-radius: var(--radius);
+  padding: 0.75rem 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background var(--transition), box-shadow var(--transition);
+  box-shadow: var(--shadow-glow-aqua);
+}
+
+.btnPrimary:hover {
+  background: var(--color-accent-hover);
+  box-shadow: 0 0 32px rgba(45, 212, 191, 0.2);
+}
+
+.scanningIndicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+}
+
+.spinner {
+  width: 28px;
+  height: 28px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--color-accent);
+  border-radius: 50%;
+  animation: spin 1s infinite linear;
+}
+
+.activeControls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.btnRow {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.btnSecondary {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 6px;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+  font-weight: 550;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btnSecondary:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: var(--color-accent);
+}
+
+.btnSecondary:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.progressContainer {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 3px;
+  overflow: hidden;
+}
+
+.progressBar {
+  height: 100%;
+  background: #10b981;
+  transition: width 0.1s ease;
+  box-shadow: 0 0 8px #10b981;
+}
+
+.chatForm {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chatInput {
+  flex-grow: 1;
+  background: #0d111d;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-text);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.chatInput:focus {
+  border-color: rgba(45, 212, 191, 0.55);
+  box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.12);
+}
+
+.chatSendBtn {
+  background: var(--color-accent);
+  color: var(--color-bg);
+  border: none;
+  border-radius: 6px;
+  padding: 0 1rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  cursor: pointer;
+}
+
+.chatSendBtn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Case Study Content */
+.detailsSection {
+  margin-top: 3rem;
+  border-top: 1px solid var(--color-border);
+  padding-top: 2rem;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+  max-width: 75ch;
+}
+
+.sectionTitle {
+  font-size: 1.35rem;
+  font-weight: 600;
+  margin: 0 0 1rem;
+  color: var(--color-accent);
+}
+
+.sectionText {
+  color: var(--color-text-muted);
+  line-height: 1.8;
+  font-size: 1rem;
+}
+
+.gridTwoCol {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 600px) {
+  .gridTwoCol {
+    grid-template-columns: 1fr;
+  }
+}
+
+.infoBox {
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid var(--color-border);
+  border-radius: 8px;
+  padding: 1.25rem;
+}
+
+.boxTitle {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.5rem;
+  color: var(--color-text);
+}
+
+.boxText {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+.solutionsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.solutionsList li {
+  position: relative;
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--color-text-muted);
+  line-height: 1.7;
+}
+
+.solutionsList li::before {
+  content: "⚡";
+  position: absolute;
+  left: 0;
+  top: 0.1rem;
+  color: var(--color-accent);
+}
+
+.actions {
+  display: flex;
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--color-border);
+}
+
+.backInline {
+  font-size: 0.95rem;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.backInline:hover {
+  color: var(--color-accent);
+}
+
+/* Keyframes */
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+@keyframes radarWave {
+  0% { transform: scaleX(0.1); opacity: 0; }
+  50% { opacity: 0.8; }
+  100% { transform: scaleX(1.2); opacity: 0; }
+}
+
+@keyframes pingTravel {
+  0% { left: 0%; opacity: 1; }
+  45% { left: 100%; opacity: 1; }
+  50% { left: 100%; opacity: 1; }
+  95% { left: 0%; opacity: 1; }
+  100% { left: 0%; opacity: 0; }
+}
+
+@keyframes fileTravel {
+  0% { left: 0%; opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { left: 100%; opacity: 0; }
+}

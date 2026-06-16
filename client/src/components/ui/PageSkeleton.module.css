@@ -1,0 +1,54 @@
+.root {
+  padding: 2rem 0 3rem;
+}
+
+.headerRow {
+  margin-bottom: 2rem;
+}
+
+.block {
+  margin-bottom: 2rem;
+  max-width: 40rem;
+}
+
+.grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+}
+
+.card {
+  height: 8rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--color-border);
+  background: linear-gradient(
+    90deg,
+    var(--color-surface) 0%,
+    var(--color-border) 50%,
+    var(--color-surface) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerMove 1.2s ease-in-out infinite;
+}
+
+.shimmer {
+  border-radius: 4px;
+  background: linear-gradient(
+    90deg,
+    var(--color-surface) 0%,
+    var(--color-border) 50%,
+    var(--color-surface) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmerMove 1.2s ease-in-out infinite;
+  margin-bottom: 0.5rem;
+}
+
+@keyframes shimmerMove {
+  0% {
+    background-position: 100% 0;
+  }
+  100% {
+    background-position: -100% 0;
+  }
+}
