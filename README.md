@@ -173,10 +173,43 @@ Next.js kullanılmıyor; başlık ve meta etiketleri **`react-helmet-async`** il
 - `GET /api/auth/me` — Oturum bilgisi (admin)
 - `/api/admin/*` — Tüm admin endpoint’leri (cookie auth gerekli)
 
-## Üretim (Production) notları
+## Üretim (Production) — Render
+
+Tek **Web Service** ile API ve React build birlikte sunulur (`server` statik olarak `client/dist` servis eder).
+
+### Render adımları
+
+1. [Render Dashboard](https://dashboard.render.com/) → **New → Blueprint** (veya Web Service).
+2. Repo: `https://github.com/user21905/portf-y`
+3. Kök dizin: proje kökü (`package.json` burada).
+4. **Build Command:** `npm install && npm run build`
+5. **Start Command:** `npm start`
+6. **Health Check Path:** `/api/content`
+
+### Ortam değişkenleri (Render → Environment)
+
+| Değişken | Açıklama |
+| -------- | -------- |
+| `NODE_ENV` | `production` |
+| `JWT_SECRET` | Güçlü rastgele anahtar (Render “Generate” kullanılabilir) |
+| `FIREBASE_PROJECT_ID` | Firebase service account |
+| `FIREBASE_CLIENT_EMAIL` | Firebase service account |
+| `FIREBASE_PRIVATE_KEY` | Tek satır, `\n` kaçışlı private key |
+| `CLIENT_ORIGIN` | Canlı site URL’si, örn. `https://portf-y.onrender.com` |
+| `PUBLIC_SITE_URL` | Sitemap/robots için aynı URL |
+
+`PORT` Render tarafından otomatik atanır; tanımlamayın.
+
+7. Deploy sonrası bir kez seed (Render Shell veya lokalden production env ile):
+
+   ```bash
+   npm run db:seed
+   ```
+
+### Notlar
 
 - Firestore **Europe-West** gibi kullanıcıya yakın bir bölgeyi seç.
-- Service account JSON'u asla repoya commit'leme; deployment ortamında (Vercel / Render / Fly.io / Docker) env var olarak geç.
+- Service account JSON'u asla repoya commit'leme; deployment ortamında env var olarak geç.
 - Büyük listelerde `orderBy` + `where` birleşimleri için Firestore Console üzerinden **composite index** oluşturman gerekebilir; konsol bunu ilk hatada otomatik öneriyor.
 
 ## Lisans

@@ -1,4 +1,5 @@
 import express from "express";
+import path from "node:path";
 import cors from "cors";
 import { env } from "./config/env.js";
 import { attachCookieParser } from "./middleware/auth.middleware.js";
@@ -8,6 +9,7 @@ import { authRoutes } from "./routes/auth.routes.js";
 import { adminRoutes } from "./routes/admin.routes.js";
 import { serveRobots, serveSitemap } from "./routes/seo.routes.js";
 import { errorHandler } from "./middleware/error-handler.middleware.js";
+import { CLIENT_DIST_DIR, clientDistExists } from "./lib/client-dist.js";
 
 const app = express();
 
@@ -33,6 +35,20 @@ app.use("/api", publicRoutes);
 app.use("/api/contact", contactRoutes);
 app.use("/api/auth", authRoutes);
 app.use("/api/admin", adminRoutes);
+
+if (env.isProduction && clientDistExists()) {
+  app.use(express.static(CLIENT_DIST_DIR, { index: false, maxAge: "1d" }));
+
+  app.get("*", (req, res, next) => {
+    if (req.path.startsWith("/api")) {
+      next();
+      return;
+    }
+    res.sendFile(path.join(CLIENT_DIST_DIR, "index.html"), (err) => {
+      if (err) next(err);
+    });
+  });
+}
 
 app.use((_req, res) => {
   res.status(404).json({ error: "Bulunamadı" });

@@ -29,7 +29,12 @@ router.post(
 );
 
 router.post("/logout", (_req, res): void => {
-  res.clearCookie(COOKIE_NAME, { path: "/" });
+  res.clearCookie(COOKIE_NAME, {
+    path: "/",
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+  });
   res.json({ success: true });
 });
 
