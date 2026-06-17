@@ -3,8 +3,6 @@ import { PageLayout } from "@/components/Layout/PageLayout";
 import { HeroParticles } from "@/components/home/HeroParticles";
 import { useContent } from "@/hooks/useContent";
 import { ROUTES, projectDetailPath } from "@/config/constants";
-import { handleDownloadCV } from "@/lib/printResume";
-import { ResumePrintIcon } from "@/components/Resume/ResumePrintIcon";
 import type { Project } from "@/types/content";
 import { getProjectTechBadgeList } from "@/utils/projectTechBadges";
 import styles from "./HomePage.module.css";
@@ -60,9 +58,7 @@ export function HomePage() {
   const fullName = home?.fullName?.trim() || "";
   const headline = home?.headline?.trim() || "";
   const introText = home?.introText?.trim() || "";
-  const ctaText = home?.ctaButtonText?.trim() || "Projelere Git";
   const heroBadge = pc?.heroBadge?.trim() || "";
-  const aboutCta = pc?.aboutSecondaryCtaLabel?.trim() || "Hakkımda / Özgeçmiş";
 
   const featured = projects.filter((p) => p.isFeatured).sort((a, b) => a.orderNum - b.orderNum).slice(0, 3);
 
@@ -90,16 +86,8 @@ export function HomePage() {
           </h1>
           {introText && <p className={styles.intro}>{introText}</p>}
           <div className={styles.heroActions}>
-            <Link to={ROUTES.PROJECTS} className={styles.ctaPrimary}>{ctaText}</Link>
-            <Link to={ROUTES.ABOUT} className={styles.ctaSecondary}>{aboutCta}</Link>
-            <button
-              type="button"
-              onClick={handleDownloadCV}
-              className={styles.ctaResume}
-            >
-              <ResumePrintIcon size={18} />
-              Özgeçmişi İndir (PDF)
-            </button>
+            <Link to={ROUTES.PROJECTS} className={styles.ctaPrimary}>Projeleri Gör</Link>
+            <Link to={ROUTES.CONTACT} className={styles.ctaSecondary}>İletişime Geç</Link>
           </div>
         </div>
       </section>

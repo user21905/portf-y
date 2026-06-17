@@ -23,12 +23,6 @@ export function projectDetailPath(slug: string): string {
 /** Site logosu / marka adı (navbar, footer, CV vb.) */
 export const SITE_BRAND_NAME = "Çelebi";
 
-/** Doğrudan indirilen PDF dosya adı */
-export const RESUME_DOWNLOAD_FILENAME = "OFC_Faruk_Celebi_CV.pdf";
-
-/** @deprecated Yazdırma yedek yolu — birincil yol html2pdf */
-export const RESUME_PRINT_DOCUMENT_TITLE = "Omer_Faruk_Celebi_CV";
-
 export const SKILL_CATEGORY_LABELS: Record<string, string> = {
   core: "Core & Languages",
   frontend: "Frontend Architecture",

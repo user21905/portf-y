@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import { ROUTES } from "@/config/constants";
-import { PrintResume } from "@/components/Resume/PrintResume";
 import { PublicSiteShell } from "@/components/seo/PublicSiteShell";
 import { HomePage } from "@/pages/HomePage";
 import { AboutPage } from "@/pages/AboutPage";
@@ -22,9 +21,7 @@ import { AdminMessagesPage } from "@/pages/admin/AdminMessagesPage";
 
 export default function App() {
   return (
-    <>
-      <PrintResume />
-      <Routes>
+    <Routes>
       <Route element={<PublicSiteShell />}>
         <Route path={ROUTES.HOME} element={<HomePage />} />
         <Route path={ROUTES.ABOUT} element={<AboutPage />} />
@@ -50,6 +47,5 @@ export default function App() {
       </Route>
       <Route path="*" element={<Navigate to={ROUTES.HOME} replace />} />
     </Routes>
-    </>
   );
 }

@@ -1,8 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ROUTES, SITE_BRAND_NAME } from "@/config/constants";
-import { handleDownloadCV } from "@/lib/printResume";
-import { ResumePrintIcon } from "@/components/Resume/ResumePrintIcon";
 import type { SiteSetting } from "@/types/content";
 import styles from "./Header.module.css";
 
@@ -120,14 +118,9 @@ export function Header({ settings: _settings }: HeaderProps) {
         </nav>
 
         <div className={styles.actions}>
-          <button
-            type="button"
-            onClick={handleDownloadCV}
-            className={styles.cvButton}
-          >
-            <ResumePrintIcon size={14} />
-            CV / Özgeçmiş
-          </button>
+          <Link to={ROUTES.CONTACT} className={styles.cvButton}>
+            İletişime Geç
+          </Link>
         </div>
 
         <button
@@ -179,17 +172,13 @@ export function Header({ settings: _settings }: HeaderProps) {
           </ul>
         </nav>
 
-        <button
-          type="button"
+        <Link
+          to={ROUTES.CONTACT}
           className={styles.mobileCvButton}
-          onClick={() => {
-            closeMenu();
-            handleDownloadCV();
-          }}
+          onClick={closeMenu}
         >
-          <ResumePrintIcon size={16} />
-          CV / Özgeçmiş
-        </button>
+          İletişime Geç
+        </Link>
 
         <button type="button" className={styles.closeFooter} onClick={closeMenu}>
           Kapat
