@@ -21,6 +21,8 @@ export function AdminContactPage() {
   const [linkedinUrl, setLinkedinUrl] = useState("");
   const [twitterUrl, setTwitterUrl] = useState("");
 
+  const safeTrim = (value: string | null | undefined) => value?.trim() ?? "";
+
   useEffect(() => {
     Promise.all([adminApi.getPageContent(), adminApi.getSettings()])
       .then(([pageContent, settings]) => {
@@ -62,9 +64,9 @@ export function AdminContactPage() {
           partnershipsBody: partnershipsBody.trim(),
         }),
         adminApi.updateSettings({
-          githubUrl: githubUrl.trim() || null,
-          linkedinUrl: linkedinUrl.trim() || null,
-          twitterUrl: twitterUrl.trim() || null,
+          githubUrl: safeTrim(githubUrl) || null,
+          linkedinUrl: safeTrim(linkedinUrl) || null,
+          twitterUrl: safeTrim(twitterUrl) || null,
         }),
       ]);
       setSaveSuccess(true);

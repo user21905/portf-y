@@ -79,9 +79,9 @@ router.get("/settings", async (_req, res, next) => {
 const settingsValidators = [
   body("siteTitle").optional().trim(),
   body("siteDesc").optional().trim(),
-  body("githubUrl").optional().trim(),
-  body("linkedinUrl").optional().trim(),
-  body("twitterUrl").optional().trim(),
+  body("githubUrl").optional({ values: "falsy" }).trim(),
+  body("linkedinUrl").optional({ values: "falsy" }).trim(),
+  body("twitterUrl").optional({ values: "falsy" }).trim(),
   body("metaKeywords").optional().trim(),
   body("ogImageUrl").optional().trim(),
   body("ogImageAlt").optional().trim(),
@@ -220,12 +220,12 @@ const projectValidators = [
   body("challenge").optional().trim(),
   body("solution").optional().trim(),
   body("isFeatured").optional().isBoolean(),
-  body("githubUrl").optional().trim(),
-  body("demoUrl").optional().trim(),
-  body("imageUrl").optional().trim(),
-  body("imageAlt").optional().trim(),
+  body("githubUrl").optional({ values: "falsy" }).trim(),
+  body("demoUrl").optional({ values: "falsy" }).trim(),
+  body("imageUrl").optional({ values: "falsy" }).trim(),
+  body("imageAlt").optional({ values: "falsy" }).trim(),
   body("orderNum").optional().isInt(),
-  body("caseStudyContent").optional().trim(),
+  body("caseStudyContent").optional({ values: "falsy" }).trim(),
 ];
 router.post("/projects", validate(projectValidators), async (req, res, next) => {
   try {
